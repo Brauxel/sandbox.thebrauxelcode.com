@@ -1,0 +1,23 @@
+{
+  "name": "html",
+  "version": "1.0.0",
+  "description": "The Brauxelcode Sandbox",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Milo1184/sandbox.thebrauxelcode.com.git"
+  },
+  "keywords": [
+    "react",
+    "reactjs"
+  ],
+  "author": "Aakash Bhatia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Milo1184/sandbox.thebrauxelcode.com/issues"
+  },
+  "homepage": "https://github.com/Milo1184/sandbox.thebrauxelcode.com#readme"
+}
