@@ -1,0 +1,22 @@
+@import "./components/scss/globals.scss";
+
+body {
+	background-color: #fff;
+}
+
+#app {
+	border: 1px solid #fff;
+	display: flex;
+}
+
+:fullscreen a {
+    display: flex;
+}
+
+a {
+	display: flex;
+}
+
+div {
+	display: flex;
+}

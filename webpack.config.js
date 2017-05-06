@@ -1,48 +1,59 @@
-var HTMLWebpackPlugin = require('html-webpack-plugin');
-var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
+const webpack = require('webpack');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
 	template: __dirname + '/app/index.html',
 	filename: 'index.html',
 	inject: 'body'
 });
-
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
- 
-const extractSass = new ExtractTextPlugin({
-    filename: "styles.css",
-    disable: process.env.NODE_ENV === "development"
+
+const extractSass = new ExtractTextPlugin({ // define where to save the file
+      filename: 'bundle.css',
+      allChunks: true
 });
 
+const minifyJS = new webpack.optimize.UglifyJsPlugin({
+	minimize: true
+});
+
+
 module.exports = {
-	entry: __dirname +'/app/index.js',
+	entry: [__dirname + '/app/index.js', __dirname + '/app/index.css'],
 	module: {
 		rules: [
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				loader: 'babel-loader'
+				use: 'babel-loader'
 			},
 			{
 				test: /\.jsx$/,
 				exclude: /node_modules/,
-				loader: 'babel-loader'
+				use: 'babel-loader'
 			},
 			{
-				test: /\.scss$/,
-				exclude: /node_modules/,
-				loader: extractSass.extract({
-					use: [{
-						loader: 'css-loader'
-					},{
-						loader: 'sass-loader'
-					}],
-					fallback: "style-loader"
-				})
+				test: /\.css$/,
+	            use: ExtractTextPlugin.extract({
+	                use: [
+	                	{
+	                		loader: 'css-loader',
+	                		options: {
+	                			minimize: true,
+	                			sourceMap: true
+	                		}
+
+	                	}, 
+	                	{loader: 'sass-loader'}, 
+	                	{loader: 'postcss-loader'}
+	                ],
+	                fallback: 'style-loader'
+	            })
 			}
 		]
 	},
 	output: {
-		filename: 'transformer.js',
-		path: __dirname + '/build'
+		path: __dirname + '/dist',
+		filename: 'bundle.js'
 	},
-	plugins: [extractSass, HTMLWebpackPluginConfig]
+	plugins: [extractSass, minifyJS, HTMLWebpackPluginConfig]
 };

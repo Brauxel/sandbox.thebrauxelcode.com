@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './components/App.jsx';
-import Second from './components/Second.jsx'
+import App from './components/jsx/App.jsx';
+import Second from './components/jsx/Second.jsx'
 
 //var App = require('./components/App.jsx');
 
